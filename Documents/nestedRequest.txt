@@ -1,0 +1,88 @@
+from scrapy.spiders import Spider
+import scrapy
+import os
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+from urllib.error import HTTPError
+
+class   universitySpider(Spider):
+    name    = 'universities'
+    allowed_domains=["www.utoronto.ca"]
+    start_urls=['https://www.utoronto.ca/']
+
+    
+
+    """ def parse(self, response): 
+        website='https://www.utoronto.ca/'
+        self.log(response.request.url)
+        page = response.url.split("/")[-2]        
+        filename = 'quotes-%s.html' % page
+
+        with open(filename, 'wb') as f: 
+            f.write(response.body) 
+        
+        try:
+ 
+            html = urlopen(response.url)
+
+        except HTTPError as e:
+ 
+            print(e)
+ 
+        else:
+ 
+            res = BeautifulSoup(html.read(),"html5lib")
+            tags = res.findAll("a")
+            yield tags
+            with open("file.txt",'w') as f:
+                for tag in tags:
+                    f.write(str(tag)+"\n")
+            
+
+
+        for url in response.xpath('//a[contains(@href,"/academics")]/@href').extract():
+            if  "http" not in url:                                  
+                with open("parsedText.txt", "r+") as f:
+                    line_found = any(website+url in line for line in f)
+                    if not line_found:
+                        f.seek(0, os.SEEK_END)                        
+                        f.write("\n"+website+url+"\n")    
+            
+                yield   scrapy.Request(website+url,callback=self.parse)                    
+            else:
+                with open("parsedText.txt", "r+") as f:
+                    line_found = any(url in line for line in f)
+                    if not line_found:
+                        f.seek(0, os.SEEK_END)
+                        f.write("\n"+url+"\n")    
+                return   scrapy.Request(url,callback=self.parse_second) """
+    website='https://www.utoronto.ca/'
+    def parse(self,response):
+        
+        for url in response.xpath('//a[contains(@href,"/academics")]/@href').extract():
+            if  "http" not in url:
+                return   scrapy.Request(self.website+url,callback=self.parse_second)                                      
+                
+            """ else:
+                return scrapy.Request(url,callback=self.parse_third) """
+                
+        
+
+    def parse_second(self,response):
+        self.writeToFile(response.url)
+        self.log('inside second')
+        
+        yield scrapy.Request(response.url,self.parse_second)       
+
+
+    """ def parse_third(self,response):
+        writeToFile(response.url)
+        return 'a' """
+
+
+    def writeToFile(self,url):
+        with open("parsedText.txt", "r+") as f:
+            line_found = any(url in line for line in f)
+            if not line_found:
+                f.seek(0, os.SEEK_END)                        
+                f.write("\n"+url+"\n")    
