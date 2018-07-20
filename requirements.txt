@@ -1,0 +1,7 @@
+scrapy
+scrapyd
+psycopg2
+bs4
+configparser
+twisted
+apscheduler
