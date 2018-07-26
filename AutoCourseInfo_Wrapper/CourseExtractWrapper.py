@@ -1,9 +1,12 @@
 import configparser
 import sys
 import importlib
+import os
+
 config=configparser.ConfigParser()
 config.read('webExtract.ini')
 sys.path.append(config['ChoprasWebExtract']['custompythonpath'])
+
 
 
 import scrapy
@@ -17,18 +20,24 @@ from scrapy.utils.project import get_project_settings
 from scrapy import log, signals
 from    threading   import  Thread
 
+print(sys.path)
 
 
-
-from AutoCourseInfo_Wrapper.InteractUser  import interactUser
-from AutoCourseInfo_Wrapper.Scheduler   import scheduler 
+from InteractUser  import interactUser
+from Scheduler   import scheduler 
 
      # Get the university list from db.
     # Take the input from the as a choice of university with available scheduling time
     
 interact=interactUser()
-universityList=interact.getUniversityList()
-spiderPath=interact.getUniversityChoice(universityList)
+
+#read schedule time from db
+spiderPath=interact.getUniversityScheduledTime()
+
+
+#following =involves user selection.
+#universityList=interact.getUniversityList()
+#spiderPath=interact.getUniversityChoice(universityList)
         
 
     

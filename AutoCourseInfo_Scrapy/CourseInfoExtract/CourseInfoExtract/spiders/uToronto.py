@@ -5,7 +5,6 @@ import  scrapy
 import  logging
 import  os
 import  json
-from    anytree import  Node,RenderTree
 import  uuid
 import  inspect
 config=configparser.ConfigParser()
@@ -18,7 +17,7 @@ from    urllib.request                      import  urlopen
 from    urllib.parse                        import  urlparse
 from    AutoCourseInfo_Export.ExportData    import  exportCrawledLink
 from    scrapy                              import  settings
-from    AutoCourseInfo_Scrapy.CourseInfoExtract import  RelationalEntities
+
 
 class UtorontoSpider(scrapy.Spider):
     
@@ -29,7 +28,7 @@ class UtorontoSpider(scrapy.Spider):
     start_urls          =   ["https://www.utoronto.ca/"]
     secondStageCrawledLinks=[]    
     
-    buildParentChildRelation=RelationalEntities.BuildParentChildRelation()
+   
     
     stageCount=0
     

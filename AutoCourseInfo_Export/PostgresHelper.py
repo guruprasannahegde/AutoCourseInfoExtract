@@ -12,7 +12,7 @@ class   postgresHelper():
             params=configDataBase.config(self)
             self.connection=psycopg2.connect(**params)
             self.cursor=self.connection.cursor()            
-            #return
+            
         except (Exception, psycopg2.DatabaseError) as error:
             #To DO: Log the exception to database
             print("error")

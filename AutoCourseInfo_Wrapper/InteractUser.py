@@ -1,6 +1,16 @@
 import datetime
-
+import sys
+from os import path
 import psycopg2
+import configparser
+
+
+
+config=configparser.ConfigParser()
+config.read('webExtract.ini')
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+#sys.path.append(config['ChoprasWebExtract']['custompythonpath'])
+print(sys.path)
 
 from AutoCourseInfo_Export.PostgresHelper import postgresHelper
 from AutoCourseInfo_Scrapy.CourseInfoExtract.CourseInfoExtract.spiders import *
@@ -88,3 +98,33 @@ class interactUser():
             scheduleTime=int(input("1:Now\n2:Tomorrow"))
             scheduledTimeList[spiderPath[x]]=d[scheduleTime]
         return scheduledTimeList
+
+    def getUniversityScheduledTime(self):
+
+        post=postgresHelper()
+        post.connect()
+
+        query='SELECT   "UniversityName","SpiderName","ScheduledTime" FROM    "ChoprasData"."UniversityMaster"'
+        try:
+            d={}
+            scheduledTimeList={}
+            post.cursor.execute(query)
+            res=post.cursor.fetchall()
+
+            for x   in  range(0,res.__len__()):
+                scheduledTimeList[res[x][1]]=res[x][2]
+
+            post.cursor.close()
+            post.closeConnection()
+
+            """ for x   in  range(0,res.__len__()):                
+                d[x]=res[x] """
+
+            
+            return scheduledTimeList
+            
+        except  (Exception, psycopg2.DatabaseError) as error:
+            #TO DO: log exception to database.
+            post.cursor.close()
+            post.closeConnection()
+            print(error) 
