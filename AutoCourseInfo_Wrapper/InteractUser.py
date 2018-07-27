@@ -11,7 +11,6 @@ config.read('webExtract.ini')
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
 #sys.path.append(config['ChoprasWebExtract']['custompythonpath'])
 
-
 from AutoCourseInfo_Export.PostgresHelper import postgresHelper
 from AutoCourseInfo_Scrapy.CourseInfoExtract.CourseInfoExtract.spiders import *
 
@@ -104,17 +103,16 @@ class interactUser():
 
         post=postgresHelper()
         post.connect()
-        
+
         query='SELECT   "UniversityName","SpiderName","ScheduledTime" FROM    "ChoprasData"."UniversityMaster"'
         try:
-            
             d={}
             scheduledTimeList={}
             post.cursor.execute(query)
             res=post.cursor.fetchall()
 
             for x   in  range(0,res.__len__()):
-                scheduledTimeList[res[x][1]]=res[x][2]                
+                scheduledTimeList[res[x][1]]=res[x][2]
 
             post.cursor.close()
             post.closeConnection()

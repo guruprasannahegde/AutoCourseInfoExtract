@@ -4,4 +4,7 @@ webExtract.ini
 Dockerfile*
 docker-compose*
 .dockerignore
+<<<<<<< HEAD
 
+=======
+>>>>>>> f7f3467256c511a1bf074880fc7c9ae6f9afd1a9

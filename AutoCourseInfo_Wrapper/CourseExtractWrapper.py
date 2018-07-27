@@ -2,13 +2,12 @@ import configparser
 import sys
 import importlib
 import os
-import datetime
-from os import path
 config=configparser.ConfigParser()
 config.read('webExtract.ini')
 sys.path.append(config['ChoprasWebExtract']['custompythonpath'])
 
-sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+
+
 
 import scrapy
 from twisted.internet import reactor
@@ -20,7 +19,8 @@ from apscheduler.schedulers.twisted import TwistedScheduler
 from scrapy.utils.project import get_project_settings
 from scrapy import log, signals
 from    threading   import  Thread
-from AutoCourseInfo_Scrapy.CourseInfoExtract.CourseInfoExtract.spiders import uToronto
+
+
 
 
 from InteractUser  import interactUser
