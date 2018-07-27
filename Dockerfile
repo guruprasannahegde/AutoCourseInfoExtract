@@ -16,17 +16,10 @@ WORKDIR /app/Autocourseinfoextract
 COPY . /app/Autocourseinfoextract
 
 
-<<<<<<< HEAD
 
+ 
 # Using pip:
 RUN pip install -r requirements.txt
-
-=======
-
-
-# Using pip:
-RUN pip install -r requirements.txt
->>>>>>> f7f3467256c511a1bf074880fc7c9ae6f9afd1a9
 #ENV PYTHONPATH="$PYTHONPATH:/app/Autocourseinfoextract"
 CMD ["python","./AutoCourseInfo_Wrapper/CourseExtractWrapper.py"]
 
