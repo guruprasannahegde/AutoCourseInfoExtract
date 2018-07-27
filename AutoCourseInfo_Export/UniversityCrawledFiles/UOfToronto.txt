@@ -742,3 +742,11 @@ http://www.artsci.utoronto.ca/futurestudents/programs/progs/renaissance#portlet-
 http://www.artsci.utoronto.ca/futurestudents/programs/progs/policy#documentContent
 
 http://www.artsci.utoronto.ca/futurestudents/programs/progs/policy#portlet-navigation-tree
+
+http://www.artsci.utoronto.ca/futurestudents/programs/progs/womenandgender#documentContent
+
+http://www.artsci.utoronto.ca/futurestudents/programs/progs/womenandgender#portlet-navigation-tree
+
+http://www.artsci.utoronto.ca/futurestudents/programs/progs/visual-studies#documentContent
+
+http://www.artsci.utoronto.ca/futurestudents/programs/progs/visual-studies#portlet-navigation-tree

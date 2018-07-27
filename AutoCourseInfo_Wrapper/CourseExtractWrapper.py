@@ -1,10 +1,14 @@
 import configparser
 import sys
 import importlib
+import os
+import datetime
+from os import path
 config=configparser.ConfigParser()
 config.read('webExtract.ini')
 sys.path.append(config['ChoprasWebExtract']['custompythonpath'])
 
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
 
 import scrapy
 from twisted.internet import reactor
@@ -16,19 +20,24 @@ from apscheduler.schedulers.twisted import TwistedScheduler
 from scrapy.utils.project import get_project_settings
 from scrapy import log, signals
 from    threading   import  Thread
+from AutoCourseInfo_Scrapy.CourseInfoExtract.CourseInfoExtract.spiders import uToronto
 
 
-
-
-from AutoCourseInfo_Wrapper.InteractUser  import interactUser
-from AutoCourseInfo_Wrapper.Scheduler   import scheduler 
+from InteractUser  import interactUser
+from Scheduler   import scheduler 
 
      # Get the university list from db.
     # Take the input from the as a choice of university with available scheduling time
     
 interact=interactUser()
-universityList=interact.getUniversityList()
-spiderPath=interact.getUniversityChoice(universityList)
+
+#read schedule time from db
+spiderPath=interact.getUniversityScheduledTime()
+
+
+#following =involves user selection.
+#universityList=interact.getUniversityList()
+#spiderPath=interact.getUniversityChoice(universityList)
         
 
     
@@ -40,6 +49,7 @@ for x   in  spiderPath.items():
     spiderClass=x[0].split('.')[1]
     schedule.addJob(spiderModulePath,spiderClass,x[1])
     
+    
 
 
 schedule.runJob()
@@ -48,9 +58,9 @@ schedule.runJob()
 
 
     
-    #process = CrawlerProcess()
-    #process.crawl(uToronto.UtorontoSpider)
-    #process.start()
+""" process = CrawlerProcess()
+process.crawl(uToronto.UtorontoSpider)
+process.start() """
 
 
 

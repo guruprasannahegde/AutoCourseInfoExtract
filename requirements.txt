@@ -3,5 +3,5 @@ scrapyd
 psycopg2
 bs4
 configparser
-twisted
+Twisted
 apscheduler

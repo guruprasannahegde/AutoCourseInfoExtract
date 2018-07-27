@@ -12,10 +12,10 @@ class   postgresHelper():
             params=configDataBase.config(self)
             self.connection=psycopg2.connect(**params)
             self.cursor=self.connection.cursor()            
-            #return
+            
         except (Exception, psycopg2.DatabaseError) as error:
             #To DO: Log the exception to database
-            print("error")
+            print(error)
 
     def closeConnection(self):
         try:
@@ -25,7 +25,7 @@ class   postgresHelper():
                 print("Connection is already closed")
         except (Exception, psycopg2.DatabaseError) as error:
             #To DO: Log the exception to database
-            print("error")
+            print(error)
 
 
 

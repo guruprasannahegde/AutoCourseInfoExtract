@@ -12,12 +12,18 @@ FROM python:3.6.5
 LABEL Name=autocourseinfoextract Version=0.0.1
 EXPOSE 3000
 
-WORKDIR /app
-ADD . /app
+WORKDIR /app/Autocourseinfoextract 
+COPY . /app/Autocourseinfoextract
+
+
 
 # Using pip:
 RUN pip install -r requirements.txt
-CMD ["python3", "-m", "autocourseinfoextract"]
+
+#ENV PYTHONPATH="$PYTHONPATH:/app/Autocourseinfoextract"
+CMD ["python","./AutoCourseInfo_Wrapper/CourseExtractWrapper.py"]
+
+
 
 # Using pipenv:
 #RUN python3 -m pip install pipenv

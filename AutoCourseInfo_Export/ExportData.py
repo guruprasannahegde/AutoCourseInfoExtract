@@ -50,12 +50,12 @@ class exportCrawledLink:
         post.closeConnection()
         
         
-
-    def exportBeautifulSoupData(self,dataToWrite,fileName,pageCrawledName): 
+    # TO do : remove unnecessary beautifulsoup
+    """ def exportBeautifulSoupData(self,dataToWrite,fileName,pageCrawledName): 
         with open(os.path.join(os.path.dirname(__file__),"\\ChoprasWebExtract\\AutoCourseInfoExtract\\AutoCourseInfo_Export\\UniversityCrawledFiles\\"+fileName),"a+")   as  f:
             f.seek(0,0)
             f.write(dataToWrite)
             #line_found=any(pageCrawledName in line for line in f)
-            """ if  not  line_found:
+            """ """ if  not  line_found:
                 f.seek(0, os.SEEK_END)                        
-                f.write("\n"+pageCrawledName+"\n") """
+                f.write("\n"+pageCrawledName+"\n") """ """ """

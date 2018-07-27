@@ -17,18 +17,22 @@ class scheduler():
 
     def addJob(self,spiderModulePath,spiderClass,scheduleTime):
         # Create Spider Object dynamically by importing module.
-        module=self.modulePath+spiderModulePath
-        module=importlib.import_module(module)
-        class_ = getattr(module, spiderClass)
-        instance = class_()
-        self.sched.add_job(self.process.crawl, 'date', args=[instance], run_date=scheduleTime)
-
+        try:
+            module=self.modulePath+spiderModulePath
+            module=importlib.import_module(module)
+            class_ = getattr(module, spiderClass)
+            instance = class_()
+            self.sched.add_job(self.process.crawl, 'date', args=[instance], run_date=scheduleTime)
+            
+        except(Exception) as error:
+            print(error)
 
     def runJob(self):
-        try:
-            self.sched.start()   
-            d=self.process.join()
-            d.addBoth(lambda _:reactor.stop())
+        try:            
+            self.sched.start()                          
+            d=self.process.join()            
+            d.addBoth(lambda _:reactor.stop())                        
             reactor.run()
-        except(KeyboardInterrupt, SystemExit):
-            pass
+            
+        except(Exception) as error:
+            print(error)
